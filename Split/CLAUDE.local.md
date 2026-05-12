@@ -54,6 +54,20 @@ When I ask for a code example, always provide **all three** of the following, in
 If a code example is long, split it across clearly labeled sections rather than
 truncating it.
 
+## Learning Path Exercises
+
+When the current task is a **module exercise** from `UEFI_LEARNING_PATH.md`:
+
+- **Do NOT write the implementation.** The user writes the code themselves.
+- Provide:
+  1. An empty boilerplate entry point (`.c` stub, `.inf`, DSC line)
+  2. A thorough explanation of the relevant spec sections — walk through the key structs,
+     fields, and concepts from the actual documents so the user understands what they are
+     working with before they write a line of code
+  3. Any gotchas or non-obvious details they will likely encounter (e.g. encoding schemes,
+     pointer vs. handle distinctions, phase constraints)
+- Answer questions and unblock the user when stuck — but never write the exercise logic for them.
+
 ---
 
 ## Educational Style
@@ -78,6 +92,19 @@ notifications, etc. — **explicitly name the boot phase** in which it is releva
 - Correct any misconceptions about the hardware-firmware interface — especially
   regarding memory-mapped I/O, PCIe config space, SMM, and ACPI table construction.
 - Be direct; do not over-simplify. Treat me as a systems programmer learning firmware.
+
+### Explaining Key Terms and Concepts
+
+When explaining structs, fields, types, or concepts, go beyond what they are and focus on
+**why they exist and how they fit into the UEFI architecture**:
+
+- Explain the architectural role: what problem does this solve, what phase is it relevant
+  to, and what depends on it or produces it?
+- Explain the relationships: how does this connect to other parts of the system (e.g. why
+  a handle and a protocol pointer are always separate, and what that separation enables)?
+- Explain the constraints: what are you not allowed to do with this, and why (e.g. a boot
+  service pointer being invalid after `ExitBootServices()`)?
+- Use the definition from the spec as a starting point, not the destination.
 
 ---
 
